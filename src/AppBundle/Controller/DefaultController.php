@@ -14,4 +14,12 @@ class DefaultController extends Controller
     {
         return $this->render('AppBundle:Default:index.html.twig', ['nome' => $nome]);
     }
+
+    /**
+     * @Route("/run/{marca}/{modelo}", name="run")
+     */
+    public function runAction($marca, $modelo)
+    {
+        return $this->render('AppBundle:Default:run.html.twig', ['marca' => $marca, 'modelo' => $modelo]);
+    }
 }
