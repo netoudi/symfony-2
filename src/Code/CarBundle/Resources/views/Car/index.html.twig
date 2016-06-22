@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CodeCar</title>
+</head>
+<body>
+<ul>
+    <h1>Car Management System</h1>
+    {% for key, brands in cars %}
+        <li>
+            <h3>{{ key | upper }}</h3>
+            <ol>
+                {% for model in brands %}
+                    <li>{{ model }}</li>
+                {% endfor %}
+            </ol>
+            <hr>
+        </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
