@@ -5,19 +5,24 @@
     <title>CodeCar</title>
 </head>
 <body>
-<ul>
-    <h1>Car Management System</h1>
-    {% for key, brands in cars %}
-        <li>
-            <h3>{{ key | upper }}</h3>
-            <ol>
-                {% for model in brands %}
-                    <li>{{ model }}</li>
-                {% endfor %}
-            </ol>
-            <hr>
-        </li>
+<table width="1200" cellpadding="7" cellspacing="2" border="1" align="center">
+    <caption><h1>Car Management System</h1></caption>
+    <tr>
+        <th width="5%">Id</th>
+        <th>Model</th>
+        <th>Year</th>
+        <th>Color</th>
+        <th>Manufacturer</th>
+    </tr>
+    {% for car in cars %}
+        <tr>
+            <td align="center">{{ "%03d"| format(car.id) }}</td>
+            <td align="center">{{ car.model }}</td>
+            <td align="center">{{ car.year }}</td>
+            <td align="center">{{ car.color }}</td>
+            <td align="center">{{ car.manufacturer | upper }}</td>
+        </tr>
     {% endfor %}
-</ul>
+</table>
 </body>
 </html>
