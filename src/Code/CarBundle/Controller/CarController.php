@@ -3,6 +3,7 @@
 namespace Code\CarBundle\Controller;
 
 use Code\CarBundle\Entity\Car;
+use Code\CarBundle\Entity\Manufacturer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -194,21 +195,29 @@ class CarController extends Controller
             ];
 
             foreach ($data as $manufacturer => $models) {
+                $newManufacturer = new Manufacturer();
+                $newManufacturer->setName($manufacturer);
+
                 foreach ($models as $model) {
                     $car = new Car();
                     $car->setModel($model);
                     $car->setYear(mt_rand(2000, 2016));
                     $car->setColor($colors[mt_rand(0, 4)]);
-                    $car->setManufacturer($manufacturer);
+                    $car->setManufacturer($newManufacturer);
 
-                    $em->persist($car);
-                    $em->flush();
+                    $newManufacturer->addCar($car);
                 }
+
+                $em->persist($newManufacturer);
+                $em->flush();
             }
 
             $cars = $repo->findAll();
         }
 
-        return array('cars' => $cars);
+        $repoManufacturer = $em->getRepository(Manufacturer::class);
+        $manufacturers = $repoManufacturer->findAll();
+
+        return array('cars' => $cars, 'manufacturers' => $manufacturers);
     }
 }

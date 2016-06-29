@@ -5,8 +5,10 @@
     <title>CodeCar</title>
 </head>
 <body>
+<h1 align="center">Car Management System</h1>
+
+<h2 align="center">### MODELS ###</h2>
 <table width="1200" cellpadding="7" cellspacing="2" border="1" align="center">
-    <caption><h1>Car Management System</h1></caption>
     <tr>
         <th width="5%">Id</th>
         <th>Model</th>
@@ -20,9 +22,35 @@
             <td align="center">{{ car.model }}</td>
             <td align="center">{{ car.year }}</td>
             <td align="center">{{ car.color }}</td>
-            <td align="center">{{ car.manufacturer | upper }}</td>
+            <td align="center">{{ car.manufacturer.name | upper }}</td>
         </tr>
     {% endfor %}
 </table>
+
+<br>
+<br>
+<hr>
+<br>
+
+<h2 align="center">### MANUFACTURERS ###</h2>
+{% for manufacturer in manufacturers %}
+    <table width="1200" cellpadding="7" cellspacing="2" border="1" align="center">
+        <caption><h3 align="left">{{ manufacturer.name | upper }}</h3></caption>
+        <tr>
+            <th width="10%">Id</th>
+            <th width="30%">Model</th>
+            <th width="30%">Year</th>
+            <th width="30%">Color</th>
+        </tr>
+        {% for car in manufacturer.cars %}
+            <tr>
+                <td align="center">{{ "%03d"| format(car.id) }}</td>
+                <td align="center">{{ car.model }}</td>
+                <td align="center">{{ car.year }}</td>
+                <td align="center">{{ car.color }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
 </body>
 </html>

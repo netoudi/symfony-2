@@ -2,6 +2,7 @@
 
 namespace Code\CarBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,21 +24,24 @@ class Manufacturer
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="Car", mappedBy="manufacturer", cascade={"persist", "remove"})
+     */
+    private $cars;
+
+    /**
+     * Manufacturer constructor.
+     */
+    public function __construct()
+    {
+        $this->cars = new ArrayCollection();
+    }
+
+    /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Manufacturer
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**
@@ -55,6 +59,24 @@ class Manufacturer
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCars()
+    {
+        return $this->cars;
+    }
+
+    /**
+     * @param mixed $car
+     * @return Manufacturer
+     */
+    public function addCar($car)
+    {
+        $this->cars[] = $car;
         return $this;
     }
 }

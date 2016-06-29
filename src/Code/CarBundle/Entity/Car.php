@@ -33,7 +33,8 @@ class Car
     private $color;
 
     /**
-     * @ORM\Column(name="manufacturer", type="string")
+     * @ORM\ManyToOne(targetEntity="Manufacturer", inversedBy="cars")
+     * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id")
      */
     private $manufacturer;
 
@@ -43,16 +44,6 @@ class Car
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     * @return Car
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-        return $this;
     }
 
     /**
