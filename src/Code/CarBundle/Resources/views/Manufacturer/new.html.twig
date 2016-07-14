@@ -1,0 +1,26 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h3>New Manufacturer</h3>
+
+        <form action="{{ url('manufacturer.create') }}" method="post">
+
+            <div class="form-group">
+                {{ form_widget(form) }}
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-sm">Save</button>
+                <a href="{{ url('manufacturer') }}" class="btn btn-default btn-sm">Cancel</a>
+            </div>
+
+        </form>
+
+    </div><!-- /container -->
+
+{% endblock %}

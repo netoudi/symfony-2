@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h3>MANUFACTURERS</h3>
+
+        <div class="pull-right">
+            <a href="{{ url('manufacturer.new') }}" class="btn btn-primary btn-sm">New Manufacturer</a>
+        </div>
+
+        <br>
+        <br>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th width="5%">Id</th>
+                <th>Manufacturer</th>
+                <th width="15%">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for manufacturer in manufacturers %}
+                <tr>
+                    <td>{{ manufacturer.id }}</td>
+                    <td>{{ manufacturer.name }}</td>
+                    <td class="text-right">
+                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div><!-- /container -->
+
+{% endblock %}
