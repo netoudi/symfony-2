@@ -62,4 +62,76 @@ class ManufacturerController extends Controller
 
         return array('entity' => $entity, 'form' => $form->createView());
     }
+
+    /**
+     * @Route("/{id}/edit", name="manufacturer.edit")
+     * @Template()
+     * @param $id
+     * @return array
+     */
+    public function editAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository(Manufacturer::class)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Manufacturer not found.');
+        }
+
+        $form = $this->createForm(new ManufacturerType(), $entity);
+
+        return array('entity' => $entity, 'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/manufacturer/{id}/update", name="manufacturer.update")
+     * @Template("CodeCarBundle:Manufacturer:edit.html.twig")
+     * @param Request $request
+     * @param $id
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function updateAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository(Manufacturer::class)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Manufacturer not found.');
+        }
+
+        $form = $this->createForm(new ManufacturerType(), $entity);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em->persist($entity);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('manufacturer'));
+        }
+
+        return array('entity' => $entity, 'form' => $form->createView());
+    }
+
+    /**
+     * @Route("/{id}/delete", name="manufacturer.delete")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository(Manufacturer::class)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Manufacturer not found.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('manufacturer'));
+    }
 }
