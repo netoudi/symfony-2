@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="code_manufacturers")
  * @ORM\Entity(repositoryClass="Code\CarBundle\Entity\ManufacturerRepository")
  */
-class Manufacturer
+class Manufacturer implements ManufacturerInterface
 {
     /**
      * @ORM\Id

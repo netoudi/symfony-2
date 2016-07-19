@@ -1,0 +1,5 @@
+services:
+  code.service.manufacturer:
+    class: Code\CarBundle\Service\ManufacturerService
+    arguments:
+      - '@doctrine.orm.entity_manager'

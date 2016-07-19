@@ -53,9 +53,8 @@ class ManufacturerController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $manufacturerService = $this->get('code.service.manufacturer');
+            $manufacturerService->insert($entity);
 
             return $this->redirect($this->generateUrl('manufacturer'));
         }
@@ -105,8 +104,8 @@ class ManufacturerController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $em->persist($entity);
-            $em->flush();
+            $manufacturerService = $this->get('code.service.manufacturer');
+            $manufacturerService->update($entity);
 
             return $this->redirect($this->generateUrl('manufacturer'));
         }
