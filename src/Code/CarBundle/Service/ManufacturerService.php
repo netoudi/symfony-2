@@ -36,4 +36,10 @@ class ManufacturerService
 
         return $entity;
     }
+
+    public function delete(ManufacturerInterface $entity)
+    {
+        $this->em->remove($entity);
+        $this->em->flush();
+    }
 }

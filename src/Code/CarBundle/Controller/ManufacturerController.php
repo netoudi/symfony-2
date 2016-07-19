@@ -128,8 +128,8 @@ class ManufacturerController extends Controller
             throw $this->createNotFoundException('Manufacturer not found.');
         }
 
-        $em->remove($entity);
-        $em->flush();
+        $manufacturerService = $this->get('code.service.manufacturer');
+        $manufacturerService->delete($entity);
 
         return $this->redirect($this->generateUrl('manufacturer'));
     }
